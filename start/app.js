@@ -1,5 +1,5 @@
 /*
- Your code goes here!
+ Based on teacher's answer...
  */
 
 /*
@@ -20,60 +20,84 @@ var firstPasswordInput = document.querySelector('#first');
 var secondPasswordInput = document.querySelector('#second');
 var submit = document.querySelector('#submit');
 
-function checkField(passwordInput) {
-    var possibleErrors = [
-        {
-            message: "at least 16 characters (longer is better, but at most 100)",
-            regex: /^.{16,}$/
-        },
-        {
-            message: "at most 100 characters (minimum 16)",
-            regex: /^.{16,100}$/
-        },
-        {
-            message: "at least one of these symbols: !, @, #, $, %, ^, &, *",
-            regex: /[\!\@\#\$\%\^\&\*]/g,
-        },
-        {
-            message: "at least one number",
-            regex: /\d/g
-        },
-        {
-            message: "at least one lowercase letter",
-            regex: /[a-z]/g
-        },
-        {
-            message: "at least one uppercase letter",
-            regex: /[A-Z]/g
-        },
-        {
-            message: "Illegal characters",
-            regex: /^[A-Za-z0-9\!\@\#\$\%\^\&\*]+$/g
-        }
-    ], errors = [];
-    for(var i = 0; i < possibleErrors.length; i++) {
-        var possibleError = possibleErrors[i],
-            match = passwordInput.value.match(possibleError.regex)
-        if(match === null) {
-            errors.push(possibleError.message);
-        }
-    }
-    if (errors.length > 0){
-        return "Error: "+errors.join(", ");
-    } else {
-        return "";
-    }
+function IssueTracker() {
+  this.issues = [];
 }
 
-/*
- You'll probably find this function useful...
- */
-submit.onclick = function () {
-    var message = checkField(firstPasswordInput);
-    firstPasswordInput.setCustomValidity(message);
-    if(firstPasswordInput.value !== secondPasswordInput.value) {
-        secondPasswordInput.setCustomValidity("Your password does not match, could you try again?");
-    } else {
-        secondPasswordInput.setCustomValidity("");
+IssueTracker.prototype = {
+  add: function(issue) {
+    this.issues.push(issue)
+  }, 
+  retreive: function() {
+    var message = '';
+    switch(this.issues.length) {
+      case 0:
+        // Do nothing (message is already "")
+        break;
+      case 1:
+        message = this.issues[0];
+        break;
+      default:
+        message = this.issues.join('\n');
+        break;
     }
+    return message;
+  }
 };
+
+submit.onclick = function() {
+  
+  var firstPassword = firstPasswordInput.value;
+  var secondPassword = secondPasswordInput.value;
+  
+  // Make UnputTracker for each input
+  var firstInputIssuesTracker = new IssueTracker();
+  var secondInputIssuesTracker = new IssueTracker();
+  
+  // Step through all requirements
+  function checkRequirements() {
+    
+    if (firstPassword.length < 16) {
+      firstInputIssuesTracker.add('fewer than 16 characters');
+    } else if (firstPassword.length > 100) {
+      firstInputIssuesTracker.add('greater than 100 characters');
+    }
+    
+    if (!firstPassword.match(/[\!\@\#\$\%\^\&\*]/g)) {
+      firstInputIssuesTracker.add('missing a symbol (!, @, #, $, %, ^, &, *)');
+    } 
+    
+    if (!firstPassword.match(/\d/g)) {
+      firstInputIssuesTracker.add('missing a number');
+    }
+    
+    if (!firstPassword.match(/[a-z]/g)) {
+      firstInputIssuesTracker.add('missing a lowercase letter');
+    }
+
+    if (!firstPassword.match(/[A-Z]/g)) {
+      firstInputIssuesTracker.add('missing an uppercase letter');
+    }
+    
+    if (firstPassword.match(/[^A-z0-9\!\@\#\$\%\^\&\*]/g)) {
+      firstInputIssuesTracker.add('includes illegal character')
+    }
+  
+  };  // end checkRequirements
+    
+  // If first and second passwords match, check requirements
+  if (firstPassword === secondPassword && firstPassword.length > 0) {
+    checkRequirements();
+  } else {
+    secondInputIssuesTracker.add('Passwords must match!');
+  }
+  
+  // Get validation messages
+  var firstInputIssues = firstInputIssuesTracker.retreive();
+  var secondInputIssues = secondInputIssuesTracker.retreive();
+  
+  // Set custom validity
+  firstPasswordInput.setCustomValidity(firstInputIssues);
+  secondPasswordInput.setCustomValidity(secondInputIssues);
+
+}; // end onclick
