@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz - One Big, Ugly Form</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <!-- BOOTSTRAP -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="page-header">
+      <h1>🂡 Cam's Company 🂡 <small>| Checkout Page</small></h1>
+    </header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Payment Information</a></li>
+          <li><a href="#">Shipping Address</a></li>
+          <li><a href="#">Billing Address</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row">
+      <form class="col-md-8">
+        <div class="cc-warning">
+          <em>Note: don't enter any actual credit card info!</em>
+        </div>
+        <h3>Payment Information</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">First Name</label>
+              <input type="text" class="form-control" id="name" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="ccard">Credit Card Number</label>
+              <input type="number" id="ccard" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Credit Card Type</label>
+                <select name="cc" class="form-control">
+                  <option>Visa</option>
+                  <option>American Express</option>
+                  <option>Mastercard</option>
+                  <option>Discover</option>
+                </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" class="form-control" id="last-name">
+            </div>
+            <div class="form-group">
+              <label for="expiration">Expiration Date</label>
+              <input type="date" id="expiration" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="number" id='cvv' class="form-control">
+            </div>
+          </div>
+        </div>
+        <h3>Shipping Address</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">First Name</label>
+              <input type="text" class="form-control" id="name" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" class="form-control" id="last-name" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="address1">Address Line 1</label>
+              <input type="text" class="form-control" id="address1" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="address2">Address Line 2</label>
+              <input type="text" class="form-control" id="address2">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city">
+            </div>
+            <div class="form-group">
+              <label for="state">State/Province</label>
+              <input type="text" class="form-control" id="state">
+            </div>
+            <div class="form-group">
+              <label for="postal">Postal Code</label>
+              <input type="text" class="form-control" id="postal">
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" class="form-control" id="country">
+            </div>
+          </div>
+        </div>
+        <h3>Billing Address</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">First Name</label>
+              <input type="text" class="form-control" id="name" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <input type="text" class="form-control" id="last-name" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="address1">Address Line 1</label>
+              <input type="text" class="form-control" id="address1" autocomplete="on">
+            </div>
+            <div class="form-group">
+              <label for="address2">Address Line 2</label>
+              <input type="text" class="form-control" id="address2">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city">
+            </div>
+            <div class="form-group">
+              <label for="state">State/Province</label>
+              <input type="text" class="form-control" id="state">
+            </div>
+            <div class="form-group">
+              <label for="postal">Postal Code</label>
+              <input type="text" class="form-control" id="postal">
+            </div>
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" class="form-control" id="country">
+            </div>
+          </div>
+        </div>
+        <h3>News and Offers</h3>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" id="email" autocomplete="on">
+        </div>
+        <div class="form-group">
+          <label>I want to receive emails with special offers and news</label>
+          <input class="inline" type="checkbox" class="form-control">
+        </div>
+        <input id="submit" type="submit" class="btn btn-success">
+      </form>
+
+      <section class="col-md-4">
+        <h3>Your Order</h3>
+        <table class="table table-bordered">
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            <td>Game Console 2015</td>
+            <td class="text-center">1</td>
+            <td class="text-right">$500.00</td>
+            <td class="text-right">$500.00</td>
+          </tr>
+          <tr>
+            <td>Platformer Bros 3D</td>
+            <td class="text-center">1</td>
+            <td class="text-right">$50.00</td>
+            <td class="text-right">$50.00</td>
+          </tr>
+          <tr class="total">
+            <td>Total</td>
+            <td>-</td>
+            <td>-</td>
+            <td class="text-right">$550.00</td>
+          </tr>
+        </table>
+
+      </section>
+    </div>
+    <div class="navbar">
+    </div>
+  </div>
+  <script>
+    var submit = document.querySelector('#submit');
+    submit.onclick = function () {
+      alert("All of your information was valid, right? I'll just go ahead and assume that it is ;)\n\nThanks for your submission!");
+    };
+  </script>
+</body>
+</html>
