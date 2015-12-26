@@ -17,9 +17,9 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Payment Information</a></li>
-          <li><a href="#">Shipping Address</a></li>
-          <li><a href="#">Billing Address</a></li>
+          <li><a href="#">Payment Information</a></li>
+          <li><a href="#shipping">Shipping and Billing</a></li>
+          <li><a href="#news">News and offers</a></li>
         </ul>
       </div>
     </nav>
@@ -32,39 +32,40 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label for="name">First Name</label>
-              <input type="text" class="form-control" id="name" autocomplete="on">
+              <label for="given-name">First Name</label>
+              <input type="text" class="form-control" id="given-name" autocomplete="on" autofocus="on">
             </div>
             <div class="form-group">
-              <label for="ccard">Credit Card Number</label>
-              <input type="number" id="ccard" class="form-control">
+              <label for="cc-number">Credit Card Number</label>
+              <input type="number" id="cc-number" class="form-control" autocomplete="on">
             </div>
             <div class="form-group">
-              <label>Credit Card Type</label>
-                <select name="cc" class="form-control">
-                  <option>Visa</option>
-                  <option>American Express</option>
-                  <option>Mastercard</option>
-                  <option>Discover</option>
-                </select>
+              <label for="card-type">Credit Card Type:</label>
+              <input list="card-type" name="card-type" class="form-control"/>
+                <datalist name="cc" id="card-type">
+                  <option value="Visa">
+                  <option value="American Express">
+                  <option value="Mastercard">
+                  <option value="Discover">
+                </datalist>
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" class="form-control" id="last-name">
+              <label for="family-name">Last Name</label>
+              <input type="text" class="form-control" id="family-name" autocomplete="on">
             </div>
             <div class="form-group">
-              <label for="expiration">Expiration Date</label>
-              <input type="date" id="expiration" class="form-control">
+              <label for="cc-exp">Expiration Date</label>
+              <input type="date" id="cc-exp" class="form-control" autocomplete="on">
             </div>
             <div class="form-group">
-              <label for="cvv">CVV</label>
-              <input type="number" id='cvv' class="form-control">
+              <label for="cc-csc">CVV</label>
+              <input type="number" id='cc-csc' class="form-control" autocomplete="on">
             </div>
           </div>
         </div>
-        <h3>Shipping Address</h3>
+        <h3 id="shipping">Shipping Address</h3>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -76,12 +77,12 @@
               <input type="text" class="form-control" id="last-name" autocomplete="on">
             </div>
             <div class="form-group">
-              <label for="address1">Address Line 1</label>
-              <input type="text" class="form-control" id="address1" autocomplete="on">
+              <label for="address-line1">Address Line 1</label>
+              <input type="text" class="form-control" id="address-line1" autocomplete="on">
             </div>
             <div class="form-group">
-              <label for="address2">Address Line 2</label>
-              <input type="text" class="form-control" id="address2">
+              <label for="address-line2">Address Line 2</label>
+              <input type="text" class="form-control" id="address-line2" autocomplete="on">
             </div>
           </div>
           <div class="col-md-6">
@@ -94,62 +95,64 @@
               <input type="text" class="form-control" id="state">
             </div>
             <div class="form-group">
-              <label for="postal">Postal Code</label>
-              <input type="text" class="form-control" id="postal">
+              <label for="postal-code">Postal Code</label>
+              <input type="text" class="form-control" id="postal-code" autocomplete="on">
             </div>
             <div class="form-group">
               <label for="country">Country</label>
               <input type="text" class="form-control" id="country">
             </div>
           </div>
-        </div>
-        <h3>Billing Address</h3>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="name">First Name</label>
-              <input type="text" class="form-control" id="name" autocomplete="on">
-            </div>
-            <div class="form-group">
-              <label for="last-name">Last Name</label>
-              <input type="text" class="form-control" id="last-name" autocomplete="on">
-            </div>
-            <div class="form-group">
-              <label for="address1">Address Line 1</label>
-              <input type="text" class="form-control" id="address1" autocomplete="on">
-            </div>
-            <div class="form-group">
-              <label for="address2">Address Line 2</label>
-              <input type="text" class="form-control" id="address2">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="city">City</label>
-              <input type="text" class="form-control" id="city">
-            </div>
-            <div class="form-group">
-              <label for="state">State/Province</label>
-              <input type="text" class="form-control" id="state">
-            </div>
-            <div class="form-group">
-              <label for="postal">Postal Code</label>
-              <input type="text" class="form-control" id="postal">
-            </div>
-            <div class="form-group">
-              <label for="country">Country</label>
-              <input type="text" class="form-control" id="country">
-            </div>
+          <div class="form-group">
+            <input type="checkbox" class="form-control-static" id="same-address" onclick="checkIfSameAddress()" checked>
+            <label>Biling address same as shipping address?</label>
           </div>
         </div>
-        <h3>News and Offers</h3>
+        <section id="billing">
+          <h3>Billing Address</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="text" class="form-control" id="name" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" class="form-control" id="last-name" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <label for="address-line1">Address Line 1</label>
+                <input type="text" class="form-control" id="address-line1" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <label for="address-line2">Address Line 2</label>
+                <input type="text" class="form-control" id="address-line2" autocomplete="on">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city">
+              </div>
+              <div class="form-group">
+                <label for="state">State/Province</label>
+                <input type="text" class="form-control" id="state">
+              </div>
+              <div class="form-group">
+                <label for="postal-code">Postal Code</label>
+                <input type="text" class="form-control" id="postal-code" autocomplete="on">
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country">
+              </div>
+            </div>
+          </div>
+        </section>
+        <h3 id="news">News and Special Offers</h3>
         <div class="form-group">
-          <label for="email">Email Address</label>
+          <label for="email">Email Address (optional):</label>
           <input type="email" class="form-control" id="email" autocomplete="on">
-        </div>
-        <div class="form-group">
-          <label>I want to receive emails with special offers and news</label>
-          <input class="inline" type="checkbox" class="form-control">
         </div>
         <input id="submit" type="submit" class="btn btn-success">
       </form>
@@ -182,13 +185,22 @@
             <td class="text-right">$550.00</td>
           </tr>
         </table>
-
       </section>
     </div>
     <div class="navbar">
     </div>
   </div>
   <script>
+
+    function checkIfSameAddress() {
+      if (document.getElementById('same-address').checked) {
+          document.getElementById('billing').style.display = 'none';
+      } else {
+        document.getElementById('billing').style.display = 'block';
+      }
+    }
+    checkIfSameAddress();
+
     var submit = document.querySelector('#submit');
     submit.onclick = function () {
       alert("All of your information was valid, right? I'll just go ahead and assume that it is ;)\n\nThanks for your submission!");
