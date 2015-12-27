@@ -11,6 +11,11 @@ Write your code in the attachEventListeners() function defintion, which starts o
 	The line that the toggle slides over.
 	 */
 	var line = document.querySelector('#line');
+  /*
+  I'm changing the scope of variable sliding.
+  */
+  var sliding = false;
+  
 
 	/**
 	 * Keeps track of touches and determines where the toggle should be on the slider.
@@ -20,10 +25,10 @@ Write your code in the attachEventListeners() function defintion, which starts o
 	function ToggleTracker (toggle, line) {
 		var toggleRect = toggle.getBoundingClientRect(),
 				lineRect = line.getBoundingClientRect();
-		
+
 		this._max = lineRect.width - toggleRect.width;
 		this._half = this._max / 2;
-		
+
 		this._touchOffset = 0;
 	}
 
@@ -41,12 +46,12 @@ Write your code in the attachEventListeners() function defintion, which starts o
 		Call this to get the toggle's distance from the origin for
 		the CSS property: transform: translateX()
 		 */
-		getTranslateX: function () {		
+		getTranslateX: function () {
 			/*
 			How far the finger actually moved
 			 */
 			var dx = this._touches[1] - this._touches[0];
-			
+
 			/*
 			transform: translateX() works by translating from a starting point. The idea is to
 			sum every dx to find the current distance from the origin.
@@ -75,7 +80,7 @@ Write your code in the attachEventListeners() function defintion, which starts o
 	You could create multiple ToggleTrackers for multiple toggles.
 	 */
 	var toggleTracker = new ToggleTracker(toggle, line);
-	
+
 	/*
 	Meant to be called by requestAnimationFrame for silky smooth 60fps performance.
 	#perfmatters - https://www.udacity.com/course/browser-rendering-optimization--ud860
@@ -93,13 +98,52 @@ Write your code in the attachEventListeners() function defintion, which starts o
 			handler). Attach the event to the toggle itself	and add the first movement.
 			2) On move, if sliding has been activated, then register a new movement and animate the move.
 			Movement doesn't need to be limited to the toggle as it's easy for a finger/mouse to slip off.
-			3) On end, set flag that the toggle has stopped sliding. Once again, it doesn't need to be 
+			3) On end, set flag that the toggle has stopped sliding. Once again, it doesn't need to be
 			limited to the toggle as the finger/mouse can come up anywhere in the window.
 		 */
 
-		/*
-		Your code goes here!
-		 */
+    // TOUCH EVENTS
+
+    toggle.addEventListener('touchstart', function(event) {
+      sliding = true;
+      var touchObj = event.touches[0];
+      var startX = touchObj.clientX; 
+      toggleTracker.addMovement(startX);
+    });
+    
+    window.addEventListener('touchmove', function(event) {
+      if(sliding) {
+        var touchObj = event.touches[0];
+        var newX = touchObj.clientX;
+        toggleTracker.addMovement(newX);
+        requestAnimationFrame(slide);
+      }
+    });   
+    
+    window.addEventListener('touchend', function(event) {
+      sliding = false;
+    }); 
+    
+    // MOUSE EVENTS
+    
+    toggle.addEventListener('mousedown', function(event) {
+      sliding = true;
+      var startX = event.clientX; 
+      toggleTracker.addMovement(startX);
+    });
+    
+    window.addEventListener('mousemove', function(event) {
+      if(sliding) {
+        var newX = event.clientX;
+        toggleTracker.addMovement(newX);
+        requestAnimationFrame(slide);
+      }
+    });   
+    
+    window.addEventListener('mouseup', function(event) {
+      sliding = false;
+    }); 
+
 	}
 
 	/*
@@ -109,7 +153,7 @@ Write your code in the attachEventListeners() function defintion, which starts o
   	/*
 		Flag to indicate whether the toggle is in the process of sliding.
 		 */
-		var sliding = false;
+		sliding = false;
     attachEventListeners();
   });
 })();
